@@ -8,6 +8,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { LoginInput, RegisterInput } from '../lib/types'
 
 type Props = {
@@ -17,6 +18,8 @@ type Props = {
 
 //TODO: Separar os componentes de Login e Registro
 //TODO: adicionar um status de loading e erro
+
+//TODO: usar o react-hook-form para validacao
 
 export const AuthForm = (props: Props) => {
   const [email, setEmail] = useState('')
@@ -70,6 +73,11 @@ export const AuthForm = (props: Props) => {
       >
         {isLogin ? 'Não tenho uma conta' : 'Já tenho uma conta'}
       </Button>
+      <Link to='/atendente'>
+        <Button mt={4} variant='link' isFullWidth>
+          Area do atendente
+        </Button>
+      </Link>
     </Container>
   )
 }
