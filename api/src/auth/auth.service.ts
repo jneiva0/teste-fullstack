@@ -32,6 +32,7 @@ export class AuthService {
     }
   }
 
+  //TODO: logar usuario após o registro
   register(data: CreateUserInput): Promise<User> {
     return this.usersService.create(data)
   }
