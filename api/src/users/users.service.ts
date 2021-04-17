@@ -9,7 +9,10 @@ export class UsersService {
     @InjectRepository(User) private usersRepository: Repository<User>
   ) {}
 
-  findOne(id: string): Promise<User> {
-    return this.usersRepository.findOne(id)
+  findOne(email: string): Promise<User> {
+    return this.usersRepository.findOne({
+      where: { email },
+    })
+  }
   }
 }

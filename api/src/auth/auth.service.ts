@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
+import { compare } from 'bcryptjs'
 import { JwtPayload, Payload } from 'src/auth/auth.interface'
 import { UsersService } from 'src/users/users.service'
 
@@ -12,11 +13,11 @@ export class AuthService {
 
   async validarUser(email: string, senha: string): Promise<any> {
     const usuario = await this.usersService.findOne(email)
-    if (usuario && usuario.senha === senha) {
-      const { senha, ...result } = usuario
-      return result
-    }
-    return null
+    if (!usuario) throw new Error('Email ou senha incorretos!')
+    const isSenhaValida = await compare(senha, usuario.senha)
+    if (!isSenhaValida) throw new Error('Email ou senha incorretos!')
+    const { senha: pass, ...resto } = usuario
+    return resto
   }
 
   signJwt(usuario: Payload): { access_token: string } {
