@@ -13,6 +13,9 @@ export class AuthService {
     private jwtService: JwtService
   ) {}
 
+  //TODO: Padronizar uso de exceptions na api (usar Error apenas para erros internos)
+  //      Usar Exception Filters
+
   async validarUser(email: string, senha: string): Promise<any> {
     const usuario = await this.usersService.findOne(email)
     if (!usuario) throw new Error('Email ou senha incorretos!')
