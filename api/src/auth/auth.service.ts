@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { compare } from 'bcryptjs'
 import { JwtPayload, Payload } from 'src/auth/auth.interface'
+import { CreateUserInput } from 'src/users/input/create.input'
+import { User } from 'src/users/user.entity'
 import { UsersService } from 'src/users/users.service'
 
 @Injectable()
@@ -25,5 +27,9 @@ export class AuthService {
     return {
       access_token: this.jwtService.sign(payload),
     }
+  }
+
+  register(data: CreateUserInput): Promise<User> {
+    return this.usersService.create(data)
   }
 }
