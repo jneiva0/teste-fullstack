@@ -8,8 +8,11 @@ export class Servico {
   @Column()
   nome: string
 
-  @Column()
+  @Column({ type: 'float' })
   valor: number
+
+  @Column({ type: 'int' })
+  minutos: number
 
   //TODO:  criar a entidade profissional para possibilitar um controle dos funcionarios
   @Column({ nullable: true })

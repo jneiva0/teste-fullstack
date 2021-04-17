@@ -1,8 +1,15 @@
 import React from 'react'
-import { CheckUser } from './components/CheckUser'
+import { Route, Routes } from 'react-router-dom'
+import { ClientArea } from './pages/ClientArea'
+import { AtendenteArea } from './pages/AtendenteArea'
 
 function App() {
-  return <CheckUser>Painel</CheckUser>
+  return (
+    <Routes>
+      <Route path='/' element={<ClientArea />} />
+      <Route path='/atendente' element={<AtendenteArea />} />
+    </Routes>
+  )
 }
 
 export default App

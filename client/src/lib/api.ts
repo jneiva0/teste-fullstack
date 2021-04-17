@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios'
-import { LoginInput, RegisterInput } from './types'
+import { CreateServicoInput, LoginInput, RegisterInput } from './types'
 
 // TODO: usar uma environment variable em vez de uma string no codigo
 const apiEndpoint = 'http://localhost:4000'
@@ -39,3 +39,6 @@ export const apiGetUser = async () => {
     if (err.response) return { data: null, error: err }
   }
 }
+
+export const apiCreateServico = async (body: CreateServicoInput) =>
+  api.post('servico/create', body)
