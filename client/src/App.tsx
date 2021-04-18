@@ -5,6 +5,12 @@ import { AtendenteArea } from './pages/AtendenteArea'
 import { AtendimentosPage } from './pages/AtendimentosPage'
 import { ManageAtendimentoPage } from './pages/ManageAtendimentoPage'
 
+import relativeTime from 'dayjs/plugin/relativeTime'
+import dayjs from 'dayjs'
+require('dayjs/locale/pt-br')
+dayjs.locale('pt-br')
+dayjs.extend(relativeTime)
+
 // Já que está sendo usado o react-router, eu aproveitaria para criar rotas aninhadas para aproveitar
 // partes do layout onde é relevante. Por exemplo: uma sidebar com um menu de ações na AtendenteArea,
 // as rotas especificas como a página de gerenciamento de atendimentos ficariam dentro dessa rota.

@@ -1,9 +1,9 @@
 import { Container, VStack } from '@chakra-ui/layout'
 import { HStack } from '@chakra-ui/react'
 import { Stat, StatLabel, StatNumber } from '@chakra-ui/stat'
+import dayjs from 'dayjs'
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { timestampToDate } from '../lib/util'
 import { fetchAtendimentos } from '../store/atendimentoSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 
@@ -51,12 +51,7 @@ export const AtendimentosPage = () => {
               <Stat>
                 <StatLabel>Criado em</StatLabel>
                 <StatNumber whiteSpace='nowrap'>
-                  {/* Aqui eu deveria usar uma forma mais apropriada para fazer o parse da timestamp */}
-                  {/* do postgre, provavelmente usar uma biblioteca como moment ou date-fns ou ao menos */}
-                  {/* abstrair para uma função de utilidade */}
-                  {timestampToDate(atendimento.createdAt).toLocaleString(
-                    'pt-BR'
-                  )}
+                  {dayjs(atendimento.createdAt).format('DD/MM HH:mm')}
                 </StatNumber>
               </Stat>
             </HStack>
