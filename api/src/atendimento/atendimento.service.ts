@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { ForbiddenException, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Atendimento } from 'src/atendimento/atendimento.entity'
 import { CreateAtendimentoInput } from 'src/atendimento/input/create.input'
@@ -27,5 +27,20 @@ export class AtendimentoService {
     return this.atendimentoRepository.find({
       relations: ['servicosToAtendimento'],
     })
+  }
+
+  getOne(id: number): Promise<Atendimento> {
+    return this.atendimentoRepository.findOne(id)
+  }
+
+  // Deveria ser feito um tratamento adequado de erros para retornar uma mensagem para
+  // notificar o frontend da falha. Ex: Caso nao exista um atendimento com esse id, caso já tenha sido iniciado etc..
+  async startAtendimento(id: number): Promise<Atendimento> {
+    const atendimento = await this.atendimentoRepository.findOne(id)
+    // Não sei a uma ForbiddenException é o correto para esse caso, se der tempo eu volto e verifico
+    if (atendimento.startTime)
+      throw new ForbiddenException('Atendimento ja iniciado!')
+    atendimento.startTime = new Date()
+    return this.atendimentoRepository.save(atendimento)
   }
 }
