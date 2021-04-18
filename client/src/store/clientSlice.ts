@@ -1,7 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { apiCreateAtendimento } from '../lib/api'
+import { apiCreateAtendimento } from '../lib/api/atendimento'
 import { CreateAtendimentoInput, ServicoToAtendimento } from '../lib/types'
 import { RootState } from './store'
+
+// No inicio eu não estava usando Redux, apenas usando a lib SWR para data fetching e trabalhando com estado local aos componentes
+// Introduzi o Redux tarde no processo (refleti que talvez fosse obrigatório no teste), com mais tempo eu refatoraria para usar o redux
+// como "Single source of truth" como geralmente é feito. Da forma atual acho que acabei introduzindo mais confusão ao código junto com o redux,
+// já que analisar e refatorar o resto do código vai exigir um tempo que talvez eu não tenho.
 
 interface NovoAtendimentoState {
   // Representa os servicos adicionados pelo cliente no atendimento

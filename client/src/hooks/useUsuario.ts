@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import { apiGetUser, apiLogin, apiRegister } from '../lib/api'
+import { apiGetUser, apiLogin, apiRegister } from '../lib/api/auth'
 import { LoginInput, RegisterInput } from '../lib/types'
 
 export const useUsuario = () => {

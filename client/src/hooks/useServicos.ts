@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import { apiGetServicos } from '../lib/api'
+import { apiGetServicos } from '../lib/api/servico'
 
 export const useServicos = () => {
   const { data, ...rest } = useSWR('servico/all', apiGetServicos)

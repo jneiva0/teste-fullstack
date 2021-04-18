@@ -3,7 +3,7 @@ import { Button } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { CadastrarServicoButton } from '../components/CadastrarServicoButton'
-import { apiCreateServico } from '../lib/api'
+import { apiCreateServico } from '../lib/api/servico'
 
 // A area do atendente não checa login, e é acessível para todos pela url
 // obviamente em um cenário real essa área seria protegida, pensei em aproveitar

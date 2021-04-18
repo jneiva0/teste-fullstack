@@ -48,7 +48,9 @@ export const ClientArea = () => {
   }
 
   const createAtendimentoAction = async () => {
-    await dispatch(createAtendimento({ servicosToAtendimento }))
+    await dispatch(
+      createAtendimento({ servicosToAtendimento, maxTime: totalMinutos })
+    )
     toast({ status: 'success', title: 'Seu atendimento foi criado!' })
   }
 
