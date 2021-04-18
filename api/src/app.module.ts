@@ -7,7 +7,13 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
 import { ServicoModule } from './servico/servico.module'
+import { AtendimentoModule } from './atendimento/atendimento.module'
+import { Atendimento } from 'src/atendimento/atendimento.entity'
+import { ServicoToAtendimento } from 'src/atendimento/servicoToAtendimento.entity'
 
+// Informações sensíveis como as da conexão ao banco nunca deveriam ser definidas aqui
+// O melhor seria carregar das variaveis de ambiente, provavelmente usando um modulo
+// de configuração criado para gerenciar essas informações
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -17,12 +23,13 @@ import { ServicoModule } from './servico/servico.module'
       username: 'api',
       password: '1234',
       database: 'api',
-      entities: [User, Servico],
+      entities: [User, Servico, Atendimento, ServicoToAtendimento],
       synchronize: true,
     }),
     UsersModule,
     AuthModule,
     ServicoModule,
+    AtendimentoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

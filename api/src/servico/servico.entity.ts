@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { ServicoToAtendimento } from 'src/atendimento/servicoToAtendimento.entity'
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
 export class Servico {
@@ -17,4 +18,10 @@ export class Servico {
   //TODO:  criar a entidade profissional para possibilitar um controle dos funcionarios
   @Column({ nullable: true })
   profissional?: string
+
+  @OneToMany(
+    () => ServicoToAtendimento,
+    servicoToAtendimento => servicoToAtendimento.servico
+  )
+  servicosToAtendimento: ServicoToAtendimento[]
 }
