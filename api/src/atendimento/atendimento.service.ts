@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Atendimento } from 'src/atendimento/atendimento.entity'
 import { CreateAtendimentoInput } from 'src/atendimento/input/create.input'
 import { Repository } from 'typeorm'
+import dayjs from 'dayjs'
 
 @Injectable()
 export class AtendimentoService {
@@ -41,6 +42,30 @@ export class AtendimentoService {
     if (atendimento.startTime)
       throw new ForbiddenException('Atendimento ja iniciado!')
     atendimento.startTime = new Date()
+    return this.atendimentoRepository.save(atendimento)
+  }
+
+  async finishAtendimento(id: number): Promise<Atendimento> {
+    const atendimento = await this.atendimentoRepository.findOne(id)
+
+    if (!atendimento.startTime || atendimento.finishTime)
+      throw new ForbiddenException('Atendimento ja iniciado ou finalizado!')
+
+    // Adiciona a duração maxima à data de inicio para achar a data limite
+    const dataLimite = dayjs(atendimento.startTime).add(
+      atendimento.maxTime,
+      'minutes'
+    )
+
+    // Se já tiver passado da data limite de finalização do atendimento então
+    // a data de término é considerada a data limite, ou seja, o atendimento terá a duração máxima
+    // Considerei essa uma alternativa melhor do que impedir o atendimento de ser finalizado
+    // Como os serviços são medidos em minutos o cálculo aqui usa a precisão de minutos
+    if (dayjs().isBefore(dataLimite, 'minutes')) {
+      atendimento.finishTime = new Date()
+    } else {
+      atendimento.finishTime = dataLimite.toDate()
+    }
     return this.atendimentoRepository.save(atendimento)
   }
 }

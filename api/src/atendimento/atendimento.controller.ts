@@ -27,4 +27,9 @@ export class AtendimentoController {
   startAtendimento(@Body('id') id: number) {
     return this.atendimentoService.startAtendimento(id)
   }
+
+  @Post('finish')
+  finishAtendimento(@Body('id') id: number) {
+    return this.atendimentoService.finishAtendimento(id)
+  }
 }
