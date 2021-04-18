@@ -1,4 +1,4 @@
-import { Heading, Text, VStack } from '@chakra-ui/layout'
+import { Heading, Text } from '@chakra-ui/layout'
 import {
   Box,
   Button,
@@ -11,7 +11,7 @@ import {
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import useSWR from 'swr'
-import { apiGetAtendimento } from '../lib/api'
+import { apiGetAtendimento } from '../lib/api/atendimento'
 import { timestampToDate } from '../lib/util'
 
 export const ManageAtendimentoPage = () => {
@@ -44,7 +44,7 @@ export const ManageAtendimentoPage = () => {
             Iniciar atendimento
           </Button>
 
-          <Button mt={4} isFullWidth isDisabled={!!atendimento.finishTime}>
+          <Button mt={3} isFullWidth isDisabled={!!atendimento.finishTime}>
             Finalizar atendimento
           </Button>
         </Box>

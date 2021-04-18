@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { apiCreateAtendimento } from '../lib/api'
+import { apiCreateAtendimento } from '../lib/api/atendimento'
 import { CreateAtendimentoInput, ServicoToAtendimento } from '../lib/types'
 import { RootState } from './store'
 

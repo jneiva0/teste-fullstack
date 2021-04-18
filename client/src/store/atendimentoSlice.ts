@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { apiGetAtendimentos } from '../lib/api'
+import { apiGetAtendimentos } from '../lib/api/atendimento'
 import { Atendimento } from '../lib/types'
 
 // Aqui estou fazendo diferente e usando o redux para buscar os atendimentos, ao contrário do SWR
