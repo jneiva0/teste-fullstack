@@ -1,5 +1,6 @@
 import { Button } from '@chakra-ui/button'
 import {
+  ButtonProps,
   FormControl,
   FormLabel,
   Input,
@@ -20,20 +21,22 @@ import { CreateServicoInput } from '../lib/types'
 
 type Props = {
   onCriar: (data: CreateServicoInput) => Promise<any>
-}
+} & ButtonProps
 
-export const CadastrarServicoButton = (props: Props) => {
+export const CadastrarServicoButton = ({ onCriar, ...rest }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { handleSubmit, register, formState, setValue } = useForm()
   const onEnviar = async (data: CreateServicoInput) => {
     console.log(data)
-    await props.onCriar(data)
+    await onCriar(data)
     onClose()
   }
 
   return (
     <>
-      <Button onClick={onOpen}>Cadastrar Serviço</Button>
+      <Button {...rest} onClick={onOpen}>
+        Cadastrar Serviço
+      </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -48,6 +51,7 @@ export const CadastrarServicoButton = (props: Props) => {
 
               <FormControl isRequired mt={4}>
                 <FormLabel>Valor</FormLabel>
+                {/* TODO: Configurar o Input para trabalhar com virgula nas casas decimais, como é o padrão brasileiro */}
                 {/* O NumberInput precisa de um tratamento especial para não causar problemas com o react-hook-form, em um projeto sério eu abstrairía isso em um componente próprio */}
                 <NumberInput
                   precision={2}

@@ -19,7 +19,8 @@ type Props = {
 //TODO: Separar os componentes de Login e Registro
 //TODO: adicionar um status de loading e erro
 
-//TODO: usar o react-hook-form para validacao
+//TODO: usar o react-hook-form para validacao e para evitar os avisos do chromium sobre
+//      ter um password field fora de um formulario
 
 export const AuthForm = (props: Props) => {
   const [email, setEmail] = useState('')
@@ -43,7 +44,7 @@ export const AuthForm = (props: Props) => {
 
   return (
     <Container>
-      <VStack mt={24}>
+      <VStack pt={24}>
         <FormControl id='email'>
           <FormLabel>Email</FormLabel>
           <Input

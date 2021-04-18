@@ -18,3 +18,12 @@ export type Servico = {
   minutos: number
   profissional?: string
 }
+
+export type ServicoToAtendimento = {
+  servico: Servico
+  profissional?: string
+}
+
+export type CreateAtendimentoInput = {
+  servicosToAtendimento: ServicoToAtendimento[]
+}
