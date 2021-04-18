@@ -12,3 +12,6 @@ export const apiGetAtendimento = async (id: number) =>
 
 export const apiStartAtendimento = async (id: number) =>
   api.post<Atendimento>('atendimento/start', { id })
+
+export const apiFinishAtendimento = async (id: number) =>
+  api.post<Atendimento>('atendimento/finish', { id })
