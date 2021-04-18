@@ -12,17 +12,27 @@ import dayjs from 'dayjs'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import useSWR from 'swr'
-import { apiGetAtendimento } from '../lib/api/atendimento'
-import { timestampToDate } from '../lib/util'
+import { apiGetAtendimento, apiStartAtendimento } from '../lib/api/atendimento'
 
 export const ManageAtendimentoPage = () => {
   const { id } = useParams()
 
-  const { data } = useSWR([`atendimento/${id}`, id], id =>
+  // TODO: lidar com status de loading ou erro
+  const { data, mutate, error } = useSWR([`atendimento/${id}`, id], (_, id) =>
     apiGetAtendimento(id)
   )
 
   const atendimento = data?.data
+
+  //TODO: lidar com o caso de não existir um id valido. Ex: entrar na rota com um id não numerico
+  //      Ex: /atendente/atendimento/abc
+
+  const startAtendimento = async () => {
+    const updatedAtendimento = await apiStartAtendimento(parseInt(id))
+    mutate(updatedAtendimento)
+  }
+
+  if (error) return <div>erro: {error.message}</div>
 
   if (!atendimento) return <div>loading...</div>
 

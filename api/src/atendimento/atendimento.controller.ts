@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common'
+import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common'
 import { AtendimentoService } from 'src/atendimento/atendimento.service'
 import { CreateAtendimentoInput } from 'src/atendimento/input/create.input'
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
@@ -19,7 +19,7 @@ export class AtendimentoController {
   }
 
   @Get('get')
-  getOne(@Param('id') id: number) {
+  getOne(@Query('id') id: number) {
     return this.atendimentoService.getOne(id)
   }
 
