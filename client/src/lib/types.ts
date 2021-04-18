@@ -26,4 +26,14 @@ export type ServicoToAtendimento = {
 
 export type CreateAtendimentoInput = {
   servicosToAtendimento: ServicoToAtendimento[]
+  maxTime: number
+}
+
+export type Atendimento = {
+  id: number
+  createdAt: string
+  maxTime: number
+  startTime?: string
+  finishTime?: string
+  servicosToAtendimento: ServicoToAtendimento[]
 }

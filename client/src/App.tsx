@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import { ClientArea } from './pages/ClientArea'
 import { AtendenteArea } from './pages/AtendenteArea'
 import { AtendimentosPage } from './pages/AtendimentosPage'
+import { ManageAtendimentoPage } from './pages/ManageAtendimentoPage'
 
 // Já que está sendo usado o react-router, eu aproveitaria para criar rotas aninhadas para aproveitar
 // partes do layout onde é relevante. Por exemplo: uma sidebar com um menu de ações na AtendenteArea,
@@ -17,6 +18,10 @@ function App() {
       <Route path='/' element={<ClientArea />} />
       <Route path='/atendente' element={<AtendenteArea />} />
       <Route path='/atendente/atendimentos' element={<AtendimentosPage />} />
+      <Route
+        path='/atendente/atendimento/:id'
+        element={<ManageAtendimentoPage />}
+      />
     </Routes>
   )
 }

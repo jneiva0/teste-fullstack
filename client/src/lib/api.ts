@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios'
 import {
+  Atendimento,
   CreateAtendimentoInput,
   CreateServicoInput,
   LoginInput,
@@ -53,3 +54,9 @@ export const apiGetServicos = async () => api.get<Servico[]>('servico/all')
 
 export const apiCreateAtendimento = async (body: CreateAtendimentoInput) =>
   api.post('atendimento/create', body)
+
+export const apiGetAtendimentos = async () =>
+  api.get<Atendimento[]>('atendimento/all')
+
+export const apiGetAtendimento = async (id: number) =>
+  api.get<Atendimento>('atendimento/get', { params: { id } })
