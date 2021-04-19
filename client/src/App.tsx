@@ -7,6 +7,7 @@ import { ManageAtendimentoPage } from './pages/ManageAtendimentoPage'
 
 import relativeTime from 'dayjs/plugin/relativeTime'
 import dayjs from 'dayjs'
+import { CSVImportPage } from './pages/CSVImportPage'
 require('dayjs/locale/pt-br')
 dayjs.locale('pt-br')
 dayjs.extend(relativeTime)
@@ -28,6 +29,7 @@ function App() {
         path='/atendente/atendimento/:id'
         element={<ManageAtendimentoPage />}
       />
+      <Route path='/importar' element={<CSVImportPage />} />
     </Routes>
   )
 }
