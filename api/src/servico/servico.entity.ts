@@ -1,5 +1,4 @@
-import { ServicoToAtendimento } from 'src/atendimento/servicoToAtendimento.entity'
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
 export class Servico {
@@ -19,9 +18,9 @@ export class Servico {
   @Column({ nullable: true })
   profissional?: string
 
-  @OneToMany(
-    () => ServicoToAtendimento,
-    servicoToAtendimento => servicoToAtendimento.servico
-  )
-  servicosToAtendimento: ServicoToAtendimento[]
+  // Usando 20% de comissao como padrão para facilitar
+  // Eu não faria isso em um projeto real a não ser que realmente fosse decidido
+  // que ter esse valor padrão definido dentro do código é a melhor alternativa
+  @Column({ default: 0.2, type: 'float' })
+  comissao: number
 }

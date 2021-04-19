@@ -1,6 +1,7 @@
 import { Atendimento } from 'src/atendimento/atendimento.entity'
-import { ServicoToAtendimento } from 'src/atendimento/servicoToAtendimento.entity'
+import { Servico } from 'src/servico/servico.entity'
 
 export class CreateAtendimentoInput implements Partial<Atendimento> {
-  servicosToAtendimento: ServicoToAtendimento[]
+  servicos: Servico[]
+  maxTime: number
 }

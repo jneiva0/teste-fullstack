@@ -1,9 +1,10 @@
-import { ServicoToAtendimento } from 'src/atendimento/servicoToAtendimento.entity'
+import { Servico } from 'src/servico/servico.entity'
 import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
+  JoinTable,
+  ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm'
 
@@ -27,10 +28,10 @@ export class Atendimento {
   @Column({ type: 'timestamp', nullable: true })
   finishTime?: Date
 
-  @OneToMany(
-    () => ServicoToAtendimento,
-    servicoToAtendimento => servicoToAtendimento.atendimento,
-    { cascade: true }
-  )
-  servicosToAtendimento: ServicoToAtendimento[]
+  // Usando eager: true para retornar os servicos relacionados automaticamente
+  // O motivo é que na maioria dos casos preciso das informações dos serviços tambem
+  // Em um cenario real a decisão de usar eager ou lazy relations geralmente leva bastante ponderação
+  @ManyToMany(() => Servico, { eager: true })
+  @JoinTable()
+  servicos: Servico[]
 }

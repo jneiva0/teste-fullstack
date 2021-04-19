@@ -25,15 +25,11 @@ export class AtendimentoService {
   }
 
   getAll(): Promise<Atendimento[]> {
-    return this.atendimentoRepository.find({
-      relations: ['servicosToAtendimento'],
-    })
+    return this.atendimentoRepository.find()
   }
 
   getOne(id: number): Promise<Atendimento> {
-    return this.atendimentoRepository.findOne(id, {
-      relations: ['servicosToAtendimento'],
-    })
+    return this.atendimentoRepository.findOne(id)
   }
 
   // Deveria ser feito um tratamento adequado de erros para retornar uma mensagem para
@@ -48,9 +44,7 @@ export class AtendimentoService {
   }
 
   async finishAtendimento(id: number): Promise<Atendimento> {
-    const atendimento = await this.atendimentoRepository.findOne(id, {
-      relations: ['servicosToAtendimento'],
-    })
+    const atendimento = await this.atendimentoRepository.findOne(id)
 
     if (!atendimento.startTime || atendimento.finishTime)
       throw new ForbiddenException('Atendimento ja iniciado ou finalizado!')

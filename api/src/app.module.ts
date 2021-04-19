@@ -1,15 +1,14 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
+import { Atendimento } from 'src/atendimento/atendimento.entity'
 import { Servico } from 'src/servico/servico.entity'
 import { User } from 'src/users/user.entity'
 import { UsersModule } from 'src/users/users.module'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
+import { AtendimentoModule } from './atendimento/atendimento.module'
 import { AuthModule } from './auth/auth.module'
 import { ServicoModule } from './servico/servico.module'
-import { AtendimentoModule } from './atendimento/atendimento.module'
-import { Atendimento } from 'src/atendimento/atendimento.entity'
-import { ServicoToAtendimento } from 'src/atendimento/servicoToAtendimento.entity'
 
 // Informações sensíveis como as da conexão ao banco nunca deveriam ser definidas aqui
 // O melhor seria carregar das variaveis de ambiente, provavelmente usando um modulo
@@ -23,7 +22,7 @@ import { ServicoToAtendimento } from 'src/atendimento/servicoToAtendimento.entit
       username: 'api',
       password: '1234',
       database: 'api',
-      entities: [User, Servico, Atendimento, ServicoToAtendimento],
+      entities: [User, Servico, Atendimento],
       synchronize: true,
     }),
     UsersModule,
