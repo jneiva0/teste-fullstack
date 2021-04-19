@@ -11,6 +11,7 @@ import {
 import dayjs from 'dayjs'
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import { ResumoAtendimento } from '../components/ResumoAtendimento'
 import { useAtendimento } from '../hooks/useAtendimento'
 
 export const ManageAtendimentoPage = () => {
@@ -56,20 +57,31 @@ export const ManageAtendimentoPage = () => {
           <StatLabel>Duração</StatLabel>
           {duracaoTotal && <StatNumber>{duracaoTotal} minutos</StatNumber>}
         </Stat>
-        <Box>
-          <Button isFullWidth isDisabled={!canStart} onClick={startAtendimento}>
-            Iniciar atendimento
-          </Button>
+        {/* Se o atendimento estiver finalizado mostrar o resumo, caso contrario mostrar */}
+        {/* os botoes para iniciar e finalizar */}
 
-          <Button
-            mt={3}
-            isFullWidth
-            isDisabled={!canFinish}
-            onClick={finishAtendimento}
-          >
-            Finalizar atendimento
-          </Button>
-        </Box>
+        {atendimento.finishTime ? (
+          <ResumoAtendimento atendimento={atendimento} />
+        ) : (
+          <Box>
+            <Button
+              isFullWidth
+              isDisabled={!canStart}
+              onClick={startAtendimento}
+            >
+              Iniciar atendimento
+            </Button>
+
+            <Button
+              mt={3}
+              isFullWidth
+              isDisabled={!canFinish}
+              onClick={finishAtendimento}
+            >
+              Finalizar atendimento
+            </Button>
+          </Box>
+        )}
       </Stack>
     </Container>
   )
