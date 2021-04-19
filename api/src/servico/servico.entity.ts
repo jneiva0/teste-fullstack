@@ -18,9 +18,6 @@ export class Servico {
   @Column({ nullable: true })
   profissional?: string
 
-  // Usando 20% de comissao como padrão para facilitar
-  // Eu não faria isso em um projeto real a não ser que realmente fosse decidido
-  // que ter esse valor padrão definido dentro do código é a melhor alternativa
-  @Column({ default: 0.2, type: 'float' })
+  @Column({ type: 'float' })
   comissao: number
 }

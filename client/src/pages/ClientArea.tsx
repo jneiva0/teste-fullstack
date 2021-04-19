@@ -36,22 +36,18 @@ export const ClientArea = () => {
   //TODO: Mover a lógica para um hook e deixar o componente lidar apenas com a UI
   const dispatch = useAppDispatch()
 
-  const servicosToAtendimento = useAppSelector(
-    state => state.client.servicosToAtendimento
-  )
+  const servicos = useAppSelector(state => state.client.servicos)
 
   const totalMinutos = useAppSelector(totalMinutosSelector)
   const totalValor = useAppSelector(totalValorSelector)
 
   const onAddServico = (servico: Servico) => {
-    dispatch(adicionarServico({ servico }))
+    dispatch(adicionarServico(servico))
     onClose()
   }
 
   const createAtendimentoAction = async () => {
-    await dispatch(
-      createAtendimento({ servicosToAtendimento, maxTime: totalMinutos })
-    )
+    await dispatch(createAtendimento({ servicos, maxTime: totalMinutos }))
     toast({ status: 'success', title: 'Seu atendimento foi criado!' })
   }
 
@@ -68,8 +64,8 @@ export const ClientArea = () => {
           {/* Normalmente eu usaria o id do item como key, mas assumindo que o usuario  */}
           {/* possa pedir o mesmo servico mais de uma vez resolvi usar o indice mesmo */}
           {/* Usar o indice não é recomendado, principalmente se a ordem dos itens pode mudar  */}
-          {servicosToAtendimento.map((servicoToAtendimento, i) => (
-            <ServicoCard key={i} servico={servicoToAtendimento.servico} />
+          {servicos.map((servico, i) => (
+            <ServicoCard key={i} servico={servico} />
           ))}
         </VStack>
         <Divider my={4} />
@@ -83,7 +79,7 @@ export const ClientArea = () => {
         <Divider my={4} />
         <Button
           colorScheme='blue'
-          isDisabled={servicosToAtendimento.length === 0}
+          isDisabled={servicos.length === 0}
           isFullWidth
           onClick={createAtendimentoAction}
         >
