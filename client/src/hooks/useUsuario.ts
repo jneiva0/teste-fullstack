@@ -13,7 +13,6 @@ export const useUsuario = () => {
   const login = async (body: LoginInput) => {
     const res = await apiLogin(body)
     if (res.data) {
-      console.log(res.data)
       localStorage.setItem('token', res.data.access_token)
       // call mutate para revalidar a query do usuario agora que temos o token JWT
       await mutate()
@@ -25,7 +24,6 @@ export const useUsuario = () => {
   }
 
   const logout = async () => {
-    console.log('logout')
     localStorage.removeItem('token')
     await mutate()
   }

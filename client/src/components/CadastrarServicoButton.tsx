@@ -27,7 +27,6 @@ export const CadastrarServicoButton = ({ onCriar, ...rest }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { handleSubmit, register, formState, setValue } = useForm()
   const onEnviar = async (data: CreateServicoInput) => {
-    console.log(data)
     const comissao = data.comissao ? data.comissao / 100 : 0
     await onCriar({ ...data, comissao })
     onClose()
