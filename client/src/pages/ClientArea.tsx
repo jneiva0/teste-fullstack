@@ -42,7 +42,11 @@ export const ClientArea = () => {
   const totalValor = useAppSelector(totalValorSelector)
 
   const onAddServico = (servico: Servico) => {
-    dispatch(adicionarServico(servico))
+    // verificação basica para impedir de adicionar serviços duplicados.
+    // Está bem longe do ideal, seria melhor mover toda a lógica pro redux
+    // Também é apenas um quickfix, o certo seria nem mostrar no modal servicos que já foram adicionados
+    const isDuplicate = servicos.map(s => s.id).includes(servico.id)
+    if (!isDuplicate) dispatch(adicionarServico(servico))
     onClose()
   }
 
