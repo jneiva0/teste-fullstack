@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Container,
   FormControl,
@@ -79,6 +80,14 @@ export const AuthForm = (props: Props) => {
           Area do atendente
         </Button>
       </Link>
+
+      <Box pos='absolute' bottom={3} right={3}>
+        <Link to='/importar'>
+          <Button variant='link' isFullWidth>
+            Atividade 2 - Importar CSV
+          </Button>
+        </Link>
+      </Box>
     </Container>
   )
 }
