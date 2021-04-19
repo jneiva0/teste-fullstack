@@ -18,7 +18,9 @@ export class ServicoToAtendimento {
   @Column({ nullable: true })
   profissional?: string
 
-  @ManyToOne(() => Servico, servico => servico.servicosToAtendimento)
+  @ManyToOne(() => Servico, servico => servico.servicosToAtendimento, {
+    eager: true,
+  })
   servico: Servico
 
   @ManyToOne(
