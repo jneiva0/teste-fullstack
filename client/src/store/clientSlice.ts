@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { apiCreateAtendimento } from '../lib/api/atendimento'
 import { CreateAtendimentoInput, ServicoToAtendimento } from '../lib/types'
+import { calculaValorTotalServicos } from '../lib/util'
 import { RootState } from './store'
 
 // No inicio eu não estava usando Redux, apenas usando a lib SWR para data fetching e trabalhando com estado local aos componentes
@@ -51,10 +52,7 @@ export const totalMinutosSelector = (state: RootState) =>
   )
 
 export const totalValorSelector = (state: RootState) =>
-  state.client.servicosToAtendimento.reduce(
-    (total, item) => total + item.servico.valor,
-    0
-  )
+  calculaValorTotalServicos(state.client.servicosToAtendimento)
 
 export const { adicionarServico } = clientSlice.actions
 
