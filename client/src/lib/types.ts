@@ -7,6 +7,7 @@ export type CreateServicoInput = {
   valor: number
   minutos: number
   profissional?: string
+  comissao?: number
 }
 
 // em um projeto serio eu importaria os tipos da API, da forma atual o código não está limpo
@@ -17,15 +18,11 @@ export type Servico = {
   valor: number
   minutos: number
   profissional?: string
-}
-
-export type ServicoToAtendimento = {
-  servico: Servico
-  profissional?: string
+  comissao: number
 }
 
 export type CreateAtendimentoInput = {
-  servicosToAtendimento: ServicoToAtendimento[]
+  servicos: Servico[]
   maxTime: number
 }
 
@@ -35,5 +32,5 @@ export type Atendimento = {
   maxTime: number
   startTime?: string
   finishTime?: string
-  servicosToAtendimento: ServicoToAtendimento[]
+  servicos: Servico[]
 }

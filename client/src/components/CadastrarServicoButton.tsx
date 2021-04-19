@@ -28,7 +28,8 @@ export const CadastrarServicoButton = ({ onCriar, ...rest }: Props) => {
   const { handleSubmit, register, formState, setValue } = useForm()
   const onEnviar = async (data: CreateServicoInput) => {
     console.log(data)
-    await onCriar(data)
+    const comissao = data.comissao ? data.comissao / 100 : 0
+    await onCriar({ ...data, comissao })
     onClose()
   }
 
@@ -85,6 +86,21 @@ export const CadastrarServicoButton = ({ onCriar, ...rest }: Props) => {
               <FormControl mt={4}>
                 <FormLabel>Profissional</FormLabel>
                 <Input {...register('profissional')} />
+              </FormControl>
+              <FormControl mt={4}>
+                <FormLabel>Comissao (%)</FormLabel>
+                <NumberInput
+                  precision={0}
+                  min={0}
+                  {...register('comissao', {
+                    valueAsNumber: true,
+                  })}
+                  onChange={(_, valorNumber) =>
+                    setValue('comissao', valorNumber)
+                  }
+                >
+                  <NumberInputField name='comissao' />
+                </NumberInput>
               </FormControl>
             </ModalBody>
 

@@ -1,5 +1,4 @@
-import { ServicoToAtendimento } from 'src/atendimento/servicoToAtendimento.entity'
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
 export class Servico {
@@ -19,9 +18,6 @@ export class Servico {
   @Column({ nullable: true })
   profissional?: string
 
-  @OneToMany(
-    () => ServicoToAtendimento,
-    servicoToAtendimento => servicoToAtendimento.servico
-  )
-  servicosToAtendimento: ServicoToAtendimento[]
+  @Column({ type: 'float' })
+  comissao: number
 }

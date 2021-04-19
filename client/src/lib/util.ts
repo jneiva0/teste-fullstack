@@ -1,4 +1,4 @@
-import { ServicoToAtendimento } from './types'
+import { Servico } from './types'
 
-export const calculaValorTotalServicos = (servicos: ServicoToAtendimento[]) =>
-  servicos.reduce((total, item) => total + item.servico.valor, 0)
+export const calculaValorTotalServicos = (servicos: Servico[]) =>
+  servicos.reduce((total, item) => total + item.valor, 0)
