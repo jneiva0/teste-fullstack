@@ -31,7 +31,9 @@ export class AtendimentoService {
   }
 
   getOne(id: number): Promise<Atendimento> {
-    return this.atendimentoRepository.findOne(id)
+    return this.atendimentoRepository.findOne(id, {
+      relations: ['servicosToAtendimento'],
+    })
   }
 
   // Deveria ser feito um tratamento adequado de erros para retornar uma mensagem para

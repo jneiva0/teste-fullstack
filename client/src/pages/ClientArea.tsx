@@ -26,6 +26,7 @@ import {
 } from '../store/clientSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { LogoutButton } from '../components/LogoutButton'
+import { ValorStat } from '../components/ValorStat'
 
 export const ClientArea = () => {
   const { onClose, onOpen, isOpen } = useDisclosure()
@@ -77,16 +78,7 @@ export const ClientArea = () => {
             <StatLabel>Tempo total</StatLabel>
             <StatNumber>{totalMinutos} Minutos</StatNumber>
           </Stat>
-          <Stat>
-            <StatLabel>Valor total</StatLabel>
-            {/* TODO: Talvez mover a formatação de moeda para uma função de utilidade */}
-            <StatNumber>
-              {totalValor.toLocaleString('pt-BR', {
-                currency: 'BRL',
-                style: 'currency',
-              })}
-            </StatNumber>
-          </Stat>
+          <ValorStat valor={totalValor} />
         </HStack>
         <Divider my={4} />
         <Button
