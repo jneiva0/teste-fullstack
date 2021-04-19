@@ -48,7 +48,9 @@ export class AtendimentoService {
   }
 
   async finishAtendimento(id: number): Promise<Atendimento> {
-    const atendimento = await this.atendimentoRepository.findOne(id)
+    const atendimento = await this.atendimentoRepository.findOne(id, {
+      relations: ['servicosToAtendimento'],
+    })
 
     if (!atendimento.startTime || atendimento.finishTime)
       throw new ForbiddenException('Atendimento ja iniciado ou finalizado!')
